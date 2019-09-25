@@ -14,13 +14,13 @@ class CategoryTaskTable extends Migration
     public function up()
     {
         Schema::create('category_task', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('category_id')->unsigned();
             $table->integer('task_id')->unsigned();
 
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('task_id')->references('id')->on('tasks');
 
-            // $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

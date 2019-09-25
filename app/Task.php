@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-	const TASK_UNAVILLABLE = 'unavailable';
+	const TASK_UNAVAILABLE = 'unavailable';
 	const TASK_AVAILABLE = 'available';
 
     protected $fillable = [

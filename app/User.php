@@ -66,8 +66,8 @@ class User extends Authenticatable
         return $this->admin == User::USER_ADMIN;
     }
 
-    public function generateVerificationTOken()
+    public static function generateVerificationToken()
     {
-        return str_ramdom(40);
+        return str_random(40);
     }
 }

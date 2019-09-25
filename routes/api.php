@@ -26,3 +26,10 @@ Route::name('resend')->get('users/{user}/resend', 'User\UserController@resend');
 */
 Route::resource('categories', 'Category\CategoryController', ['except' => ['create', 'edit']]);
 Route::resource('categories.tasks', 'Category\CategoryTaskController', ['only' => ['index']]);
+
+
+/**
+*   Tasks
+*/
+Route::resource('tasks', 'Task\TaskController', ['only' => ['index', 'show']]);
+Route::resource('tasks.categories', 'Task\TaskCategoryController', ['only' => ['index', 'update', 'destroy']]);

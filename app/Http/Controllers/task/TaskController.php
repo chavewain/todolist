@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Task;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class TaskController extends Controller
+use App\Http\Controllers\ApiController;
+use App\Task;
+use Illuminate\Http\Request;
+
+class TaskController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = Task::all();
+        // dd($usuarios);
+        return $this->showAll($usuarios);
     }
 
     /**

@@ -3,6 +3,7 @@
 use App\Task;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\softDeletes;
 use Illuminate\Support\Facades\Schema;
 
 class CreateTasksTable extends Migration

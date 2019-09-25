@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Task;
+use App\Transformers\UserTransformer;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -15,6 +16,8 @@ class User extends Authenticatable
     const USER_UNVERIFIED = '0';
     const USER_ADMIN = 'true';
     const USER_REGULAR  = 'false';
+
+    public $transformer = UserTransformer::class;
 
     /**
      * The attributes that are mass assignable.

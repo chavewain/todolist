@@ -41,14 +41,24 @@ class DatabaseSeeder extends Seeder
         factory(User::class, $usersQuantity)->create();
         factory(Category::class, $CategoriesQuantity)->create();
 
-		factory(Task::class, $TasksQuantity)->create()->each(
-			function ($task) {
-		
-				$categories = Category::all()->random(mt_rand(1, 5))->pluck('id');
 
-				$task->categories()->attach($categories);
+		factory(Task::class, $TasksQuantity)->create()->each(function ($task) {
+
+			   	$categories = Category::all()->random(mt_rand(1, 5))->pluck('id');
+
+			    foreach ($categories as $category) 
+			    {
+				    DB::table('category_task')->insert([
+			            'category_id' => $category,
+			            'task_id' => $task->id
+			        ]);
+			     }
+		
 			}
 		); 
+
+
+
 
 
     }

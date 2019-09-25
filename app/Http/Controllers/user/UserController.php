@@ -40,9 +40,9 @@ class UserController extends ApiController
         // $this->validate($request, $reglas);
         $campos = $request->all();
         $campos['password'] = bcrypt($request->password);
-        $campos['verified'] = User::USUARIO_NO_VERIFICADO;
-        $campos['verification_token'] = User::generarVerificationToken();
-        $campos['admin'] = User::USUARIO_REGULAR;
+        $campos['verified'] = User::USER_UNVERIFIED;
+        $campos['verification_token'] = User::generateVerificationToken();
+        $campos['admin'] = User::USER_REGULAR;
 
         $usuario = User::create($campos);
 
@@ -73,7 +73,7 @@ class UserController extends ApiController
         $reglas = [
             'email' => 'email|unique:users,email,' . $user->id, // exceptuamos de la validacion unique el email del usuario actual
             'password' => 'min:6|confirmed',
-            'admin' => 'in:' . User::USUARIO_ADMINISTRADOR . ',' . User::USUARIO_REGULAR
+            'admin' => 'in:' . User::USER_ADMIN . ',' . User::USER_REGULAR
         ];
 
         // if($this->validate($request, $reglas))
@@ -86,7 +86,7 @@ class UserController extends ApiController
         }
 
         if($request->has('email') && $user->email != $request->email){
-            $user->verified = User::USUARIO_NO_VERIFICADO;
+            $user->verified = User::USER_UNVERIFIED;
             $user->verification_token = User::generarVerificationToken();
             $user->email = $request->email;
         }
@@ -131,7 +131,7 @@ class UserController extends ApiController
     {
         $user = User::where('verification_token', $token)->firstOrFail();
 
-        $user->verified = User::USUARIO_VERIFICADO;
+        $user->verified = User::USER_VERIFIED;
         $user->verification_token = null;
 
         $user->save();

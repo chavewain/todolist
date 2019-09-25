@@ -89,6 +89,9 @@ class Handler extends ExceptionHandler
             if ($codigo == 1451) {
                 return $this->errorResponse('No se puede eliminar de forma permamente el recurso porque está relacionado con algún otro.', 409);
             }
+            if ($codigo == 1062) {
+                return $this->errorResponse('Violación de restricciones: datos duplicados', 409);
+            }
         }
         if ($exception instanceof TokenMismatchException) {
             return redirect()->back()->withInput($request->input());

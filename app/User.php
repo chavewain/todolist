@@ -5,12 +5,13 @@ namespace App;
 use App\Task;
 use App\Transformers\UserTransformer;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     const USER_VERIFIED = '1';
     const USER_UNVERIFIED = '0';

@@ -5,9 +5,12 @@ namespace App;
 use App\Category;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
+    use SoftDeletes;
+
 	const TASK_UNAVAILABLE = 'unavailable';
 	const TASK_AVAILABLE = 'available';
 

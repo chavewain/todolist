@@ -19,3 +19,10 @@ use Illuminate\Http\Request;
 Route::resource('users', 'User\UserController', ['except' => ['create', 'edit']]);
 Route::name('verify')->get('users/verify/{token}', 'User\UserController@verify');
 Route::name('resend')->get('users/{user}/resend', 'User\UserController@resend');
+
+
+/**
+*   Categories
+*/
+Route::resource('categories', 'Category\CategoryController', ['except' => ['create', 'edit']]);
+Route::resource('categories.tasks', 'Category\CategoryTaskController', ['only' => ['index']]);

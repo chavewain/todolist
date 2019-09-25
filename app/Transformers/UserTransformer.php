@@ -20,7 +20,7 @@ class UserTransformer extends TransformerAbstract
             'correo' => (string)$user->email,
             'esVerificado' => (int)$user->verified,
             'esAdministrador' => ($user->admin === 'true'),
-            'fechaCreacion' => (string)$user->creted_at,
+            'fechaCreacion' => (string)$user->created_at,
             'fechaActualizacion' => (string)$user->updated_at,
             'fechaEliminacion' => isset($user->deleted_at) ? (string) $user->deleted_at : null,
 
@@ -35,7 +35,7 @@ class UserTransformer extends TransformerAbstract
             'correo' => 'email',
             'esVerificado' => 'verified',
             'esAdministrador' => 'admin',
-            'fechaCreacion' => 'creted_at',
+            'fechaCreacion' => 'created_at',
             'fechaActualizacion' => 'updated_at',
             'fechaEliminacion' => 'deleted_at',
         ];

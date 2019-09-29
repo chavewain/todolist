@@ -104,12 +104,21 @@ trait ApiResponser
         return $transformation->toArray();
     }
 
-    function cacheResponse($data)
+    protected function cacheResponse($data)
     {
         $url = request()->url();
 
-        return Cache::remember($url, 30/60, fuction(){
+        $queryParams = request()->query();
+
+        ksort($queryParams);
+
+        $queryString = http_build_query($queryParams);
+        
+        $fullUrl = "{$url}?{$queryString}";
+
+
+        return Cache::remember($fullUrl, 30/60, function() use($data) {
             return $data;
-        })
+        });
     }
 }

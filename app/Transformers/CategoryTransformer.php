@@ -22,6 +22,17 @@ class CategoryTransformer extends TransformerAbstract
             'fechaActualizacion' => (string)$category->updated_at,
             'fechaEliminacion' => isset($category->deleted_at) ? (string) $category->deleted_at : null,
 
+            'links' => [
+                [
+                        'rel' => 'self',
+                        'href' => route('categories.show', $category->id),
+                ],
+                [
+                    'rel' => 'category.tasks',
+                    'href' => route('categories.tasks.index', $category->id),
+                ],
+
+            ],
         ];
     }
 

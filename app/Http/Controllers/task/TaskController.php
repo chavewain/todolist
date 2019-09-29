@@ -16,19 +16,9 @@ class TaskController extends ApiController
      */
     public function index()
     {
-        $usuarios = Task::all();
+        $tasks = Task::all();
         // dd($usuarios);
-        return $this->showAll($usuarios);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->showAll($tasks);
     }
 
     /**
@@ -39,7 +29,18 @@ class TaskController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+
+        $rules = [  
+            'name' => 'required',
+            'description' => 'required',
+        ];
+
+
+        $this->validate($request, $rules);
+
+        $task = Task::create($request->all());
+
+        return $this->showOne($task, 201);
     }
 
     /**
@@ -48,20 +49,9 @@ class TaskController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Task $task)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->showOne($task);
     }
 
     /**
@@ -71,9 +61,23 @@ class TaskController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task)
     {
-        //
+        $task->fill($request->only([
+            'name',
+            'description',
+            'status',
+            'user_id',
+
+        ]) );
+
+        if($task->isClean()){
+            return $this->errorResponse('Debes especificar al menos un valor a ser actualizado.', 422);
+        }
+
+        $task->save();
+
+        return $this->showOne($task);
     }
 
     /**
@@ -82,8 +86,10 @@ class TaskController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        //
+        $task->delete();
+
+        return $this->showOne($task);
     }
 }

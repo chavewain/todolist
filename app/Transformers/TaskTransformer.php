@@ -19,9 +19,8 @@ class TaskTransformer extends TransformerAbstract
             'titulo' => (string)$task->name,
             'detalles' => (string)$task->description,
             'estado' => (string)$task->status,
-            'imagen' => url('imgs/{$task->image}'),
+            'imagen' => (string)$task->image,
             'usuario' => (string)$task->user_id,
-
             'fechaCreacion' => (string)$task->created_at,
             'fechaActualizacion' => (string)$task->updated_at,
             'fechaEliminacion' => isset($task->deleted_at) ? (string) $task->deleted_at : null,
@@ -40,7 +39,6 @@ class TaskTransformer extends TransformerAbstract
             'estado' => 'status',
             'imagen' => 'image',
             'usuario' => 'user_id',
-
             'fechaCreacion' => 'created_at',
             'fechaActualizacion' => 'updated_at',
             'fechaEliminacion' => 'deleted_at',   

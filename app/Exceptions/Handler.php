@@ -92,6 +92,10 @@ class Handler extends ExceptionHandler
             if ($codigo == 1062) {
                 return $this->errorResponse('Violación de restricciones: datos duplicados', 409);
             }
+            if ($codigo == 1364) {
+                return $this->errorResponse('Hay campos requeridos que deben ser completados', 409);
+            }
+            
         }
         if ($exception instanceof TokenMismatchException) {
             return redirect()->back()->withInput($request->input());
